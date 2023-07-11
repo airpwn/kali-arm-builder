@@ -52,6 +52,32 @@ on:
           - usb-armory-mki
           - usb-armory-mkii
           - utilite-pro
+      desktop:
+        description: "Select Device."
+        required: false
+        default: "all"
+        type: choice
+        options:
+          - all
+          - xfce
+          - gnome
+          - kde
+          - i3
+          - lxde
+          - mate
+          - e17
+          - none
+      ee_rrrr:
+        description: "Select Device."
+        required: false
+        default: "all"
+        type: string
+ 
+      extra_check:
+        description: "Perform extra checks on the images build"
+        required: false
+        default: false
+        type: boolean
       log_file:
         description: "Enable debug & log file"
         required: false
