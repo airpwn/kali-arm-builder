@@ -12,10 +12,10 @@ on:
       set_device:
         description: "Select Device."
         required: false
-        default: "all"
+        default: "banana-pi"
         type: choice
         options:
-          - all
+ #         - all
           - banana-pi
           - banana-pro
           - beaglebone-black
@@ -55,10 +55,10 @@ on:
       desktop:
         description: "Select Image Type."
         required: false
-        default: "all"
+        default: "xfce"
         type: choice
         options:
-          - all
+ #         - all
           - xfce
           - gnome
           - kde
