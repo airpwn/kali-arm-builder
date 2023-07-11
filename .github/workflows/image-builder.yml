@@ -9,6 +9,54 @@ on:
   repository_dispatch:
   workflow_dispatch:
     inputs:
+      set_device:
+        description: "Select Device."
+        required: false
+        default: "all"
+        type: choice
+        options:
+          - all
+          - banana-pi
+          - banana-pro
+          - beaglebone-black
+          - chromebook-exynos
+          - chromebook-nyan
+          - chromebook-veyron
+          - cubieboard2
+          - cubietruck
+          - cubox-i4pro
+          - cubox
+          - gateworks-newport
+          - gateworks-ventana
+          - imx-6ull-evk
+          - mini-x
+          - nanopc-t
+          - nanopi-neo-plus2
+          - odroid-c
+          - odroid-u
+          - odroid-xu3
+          - pinebook-pro
+          - pinebook
+          - radxa-zero-emmc
+          - radxa-zero-sdcard
+          - raspberry-pi-64-bit
+          - raspberry-pi-zero-2-w-pitail
+          - raspberry-pi-zero-2-w
+          - raspberry-pi-zero-w-p4wnp1-aloa
+          - raspberry-pi-zero-w-pitail
+          - raspberry-pi-zero-w
+          - raspberry-pi
+          - raspberry-pi1
+          - riotboard
+          - trimslice
+          - usb-armory-mki
+          - usb-armory-mkii
+          - utilite-pro
+      log_file:
+        description: "Enable debug & log file"
+        required: false
+        default: false
+        type: boolean
       set_release:
         description: "Select OS Release."
         required: false
