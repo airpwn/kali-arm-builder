@@ -97,8 +97,8 @@ jobs:
     if: ${{ github.event.repository.owner.id }} == ${{ github.event.sender.id }}
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
+#      - name: Checkout
+#        uses: actions/checkout@v3
 
 #      - name: Initialization environment
 #        id: init
@@ -118,6 +118,18 @@ jobs:
 #          sudo timedatectl set-timezone "${TZ}"
 #          echo "status=success" >> ${GITHUB_OUTPUT}
 
+      - name: Init
+        id: init
+        env:
+          DEBIAN_FRONTEND: noninteractive
+        run: |
+          sudo -E apt-get -y update
+          sudo -E apt-get -y full-upgrade
+          sudo -E apt-get -y install git curl wget
+          sudo -E apt-get -y autoremove --purge
+          sudo -E apt-get clean
+          echo "status=success" >> ${GITHUB_OUTPUT}
+          
       - name: Download source code
         id: sourcecode
         if: ${{ steps.init.outputs.status }} == 'success' && !cancelled()
@@ -126,16 +138,9 @@ jobs:
           git clone -q --single-branch --depth=1 --branch=main https://gitlab.com/kalilinux/build-scripts/kali-arm.git kali-arm
           echo "status=success" >> ${GITHUB_OUTPUT}
 
-      - name: Installing All Depedencies
-        id: depes
+      - name: Dependencies install
+        id: depen
         if: ${{ steps.sourcecode.outputs.status }} == 'success' && !cancelled()
-        run: |
-          
-          echo "status=success" >> ${GITHUB_OUTPUT}
-          
-      - name: Download source code
-        id: down
-        if: ${{ steps.init.outputs.status }} == 'success' && !cancelled()
         run: |
           df -hT ${PWD}
           git clone -q --single-branch --depth=1 --branch=main https://gitlab.com/kalilinux/build-scripts/kali-arm.git kali-arm
@@ -143,7 +148,7 @@ jobs:
 
       - name: Compile Kali [ ${{ inputs.set_device }} ]
         id: compile
-        if: ${{ steps.down.outputs.status }} == 'success' && !cancelled()
+        if: ${{ steps.depen.outputs.status }} == 'success' && !cancelled()
         run: |
           # Compile method and parameter description: https://docs.armbian.com/Developer-Guide_Build-Options
         
