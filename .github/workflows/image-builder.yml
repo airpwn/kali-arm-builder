@@ -138,7 +138,7 @@ jobs:
           git clone -q --single-branch --depth=1 --branch=main https://gitlab.com/kalilinux/build-scripts/kali-arm.git kali-arm
           echo "status=success" >> ${GITHUB_OUTPUT}
 
-      - name: Dependencies install
+      - name: Install dependencies
         id: depen
         if: ${{ steps.sourcecode.outputs.status }} == 'success' && !cancelled()
         run: |
